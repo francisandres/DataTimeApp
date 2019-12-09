@@ -9,6 +9,7 @@ import { GraficobarraComponent } from './graficos/graficobarra.component';
 import { GraficoLinhaComponent } from './graficos/grafico-linha/grafico-linha.component';
 import { AdicionarReceitaComponent } from './receitas/adicionar-receita.component';
 import { ReceitasDashboardComponent } from './receitas/receitas-dashboard.component';
+import { ConfiguracoesComponent } from './configuracoes/configuracoes.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ReceitasDashboardComponent } from './receitas/receitas-dashboard.compon
     GraficobarraComponent,
     GraficoLinhaComponent,
     AdicionarReceitaComponent,
-    ReceitasDashboardComponent
+    ReceitasDashboardComponent,
+    ConfiguracoesComponent
   ],
   imports: [
     BrowserModule,
