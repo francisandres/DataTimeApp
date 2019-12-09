@@ -1,0 +1,154 @@
+<div class="container">
+  <div id="stepper1" class="bs-stepper">
+    <div class="bs-stepper-header">
+      <div class="step" data-target="#test-l-1">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">1</span>
+          <span class="bs-stepper-label">Nome</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-2">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">2</span>
+          <span class="bs-stepper-label">Valor</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-3">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">3</span>
+          <span class="bs-stepper-label">Projeção</span>
+        </button>
+      </div>
+      <div class="line"></div>
+      <div class="step" data-target="#test-l-4">
+        <button class="step-trigger">
+          <span class="bs-stepper-circle">4</span>
+          <span class="bs-stepper-label">Inicio</span>
+        </button>
+      </div>
+      <div class="line"></div>
+    </div>
+
+    <div class="bs-stepper-content">
+      <form (ngSubmit)="onSubmit()">
+        <div id="test-l-1" class="content">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nome da Receita</label>
+            <input
+              type="text"
+              class="form-control"
+              [(ngModel)]="chartData[0].label"
+              [ngModelOptions]="{ standalone: true }"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Receita"
+            />
+          </div>
+          <button (click)="next()" class="btn btn-primary">Próximo</button>
+        </div>
+        <div id="test-l-2" class="content">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Valor em Kwanzas</label>
+            <input
+              type="number"
+              class="form-control"
+              [(ngModel)]="preco"
+              [ngModelOptions]="{ standalone: true }"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Valor"
+            />
+          </div>
+          <button (click)="next()" class="btn btn-primary">Próximo</button>
+        </div>
+        <div id="test-l-3" class="content">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Projeção em anos</label>
+            <input
+              (change)="OnChangeProjecao($event)"
+              type="number"
+              min="0"
+              max="5"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Projecção"
+            />
+          </div>
+          <button (click)="next()" class="btn btn-primary">Próximo</button>
+        </div>
+        <div id="test-l-4" class="content text-center">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Data de incio da atividade</label>
+            <input
+              (change)="OnChangeData($event)"
+              type="date"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <button type="submit"  class="btn btn-primary mt-5">Gravar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <form></form>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div
+      class="col-3 shadow  m-1"
+      *ngFor="let mes of fluxo.receitas; let i = index"
+    >
+      <div class="form-group row">
+        <div class="col-8">
+          <label for="exampleInputEmail1">{{ mes.data }} Valor</label>
+
+          <input
+            type="text"
+            [(ngModel)]="fluxo.receitas[i].valor"
+            (ngModelChange)="onChangeValor($event, i)"
+            class="form-control form-control-sm"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="{{ mes.valor }}"
+          />
+        </div>
+        <div class="col-4">
+          <label for="exampleInputEmail1">Qtdde</label>
+
+          <input
+            type="text"
+            [(ngModel)]="fluxo.receitas[i].quantidade"
+            (ngModelChange)="onChangeQuantidade($event, i)"
+            class="form-control form-control-sm"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            placeholder="1"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="fluxo.receitas" class="container" [ngSwitch]="grafico">
+        <button type="button" class="btn btn-primary btn-sm" (click)="trocarGrafico()">Trocar</button>
+  <app-graficobarra
+  *ngSwitchCase="true"
+    [barChartData]="chartData"
+    [barChartLabels]="chartLabels"
+  ></app-graficobarra>
+  <app-grafico-linha
+  *ngSwitchCase="false"
+    [lineChartData]="chartData"
+    [lineChartLabels]="chartLabels"
+  ></app-grafico-linha>
+</div>
