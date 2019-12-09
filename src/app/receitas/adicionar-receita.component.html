@@ -32,7 +32,7 @@
     </div>
 
     <div class="bs-stepper-content">
-      <form (ngSubmit)="onSubmit()">
+      <form >
         <div id="test-l-1" class="content">
           <div class="form-group">
             <label for="exampleInputEmail1">Nome da Receita</label>
@@ -90,7 +90,7 @@
               aria-describedby="emailHelp"
             />
           </div>
-          <button type="submit"  class="btn btn-primary mt-5">Gravar</button>
+          <button type="submit" (click)="onSubmit()"  class="btn btn-primary mt-5">Gravar</button>
         </div>
       </form>
     </div>

@@ -6,6 +6,7 @@ import { Fluxo } from '../Fluxo';
 })
 export class FluxosReceitasService {
   fluxos: Fluxo[] = [];
+  fluxosimpostos: Fluxo[] = [];
 
   constructor() { }
 }

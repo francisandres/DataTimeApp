@@ -8,6 +8,8 @@ import { Label } from 'ng2-charts';
 import { Fluxo } from '../Fluxo';
 import { FluxosReceitasService } from '../fluxos/fluxos-receitas.service';
 
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-adicionar-receita',
@@ -30,12 +32,12 @@ export class AdicionarReceitaComponent implements OnInit {
   datastring;
   projecao: any[] = [];
   preco: number;
-  variacao = -20 / 12;
+  variacao = -10 / 12;
   grafico = true;
 
   fluxo: Fluxo;
 
-  constructor(private fluxSer: FluxosReceitasService) { }
+  constructor(private fluxSer: FluxosReceitasService, private router: Router) { }
 
   ngOnInit(): void {
     this.fluxo = new Fluxo();
@@ -48,14 +50,28 @@ export class AdicionarReceitaComponent implements OnInit {
 
   onSubmit() {
     this.fluxSer.fluxos.push(this.fluxo);
-    console.log(this.fluxSer.fluxos);
+    // tslint:disable-next-line: prefer-const
+    let print  = Array(12).fill(null);
+
+    this.fluxo.receitas.forEach((e, i) => {
+        print[i + 1] = ((e.valor / 114) * 14) * e.quantidade;
+    });
+
+    this.fluxSer.fluxosimpostos.push({nome: 'Impostos', receitas: print.slice(0, 12).map(
+      (e, i) => ({valor: e, data: this.fluxo.receitas[i].data})
+    )} as Fluxo);
+    console.log({nome: 'Impostos', receitas: print.slice(0, 12).map(
+      (e, i) => ({valor: e, data: this.fluxo.receitas[i].data})
+    )});
   }
+
   next() {
     this.stepper.next();
   }
 
   OnChangeProjecao(e) {
     // refactor de formas a tornar mais funcional
+    let preco = this.preco;
     this.fluxo.nome = this.chartData[0].label;
     this.data = new Date(this.datastring);
     if (!this.fluxo.receitas) {
@@ -68,16 +84,16 @@ export class AdicionarReceitaComponent implements OnInit {
 
     for (let i = 0; i < e.target.value * 12; i++) {
       // tslint:disable-next-line:no-debugger
-      this.projecao[i] = this.preco;
+      this.projecao[i] = preco;
       this.fluxo.receitas[i] = {
         data: format(this.data, 'MMM/yyyy'),
-        valor: this.preco,
+        valor: preco,
         quantidade: 1
       };
       this.chartLabels[i] = format(this.data, 'MMM/yyyy');
 
       this.data = addMonths(this.data, 1);
-      this.preco =
+      preco =
         Math.round(this.projecao[i] * (this.variacao / 100 + 1) * 100) / 100;
     }
 

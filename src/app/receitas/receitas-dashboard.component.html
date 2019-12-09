@@ -1,1 +1,14 @@
-<p>receitas-dashboard works!</p>
+<div class="row">
+  <div class="container col-6">
+    <app-graficobarra
+      [barChartData]="chartData"
+      [barChartLabels]="chartLabels"
+    ></app-graficobarra>
+  </div>
+  <div class="container col-6">
+    <app-graficobarra
+      [barChartData]="impostosData"
+      [barChartLabels]="chartLabels"
+    ></app-graficobarra>
+  </div>
+</div>
