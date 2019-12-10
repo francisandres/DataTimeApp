@@ -13,17 +13,17 @@ export class ConfiguracoesComponent implements OnInit {
 
   ngOnInit() {
   }
-teste(e) {
+onSelectAno(e) {
 
   let data = new Date();
   this.fluxser.periodoEstudo.length = e.target.value * 12;
   this.fluxser.periodoEstudo.fill(null, 0, e.target.value * 12 );
 
   this.fluxser.periodoEstudo.forEach(
-    ( e ,i) => {
+    ( el , i) => {
       this.fluxser.periodoEstudo[i] = format(data, 'MMM-yyyy');
       data = addMonths(data, 1);
-      return e;
+      return el;
     });
 
   console.log(this.fluxser.periodoEstudo);
