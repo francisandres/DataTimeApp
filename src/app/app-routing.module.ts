@@ -3,11 +3,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdicionarReceitaComponent } from './receitas/adicionar-receita.component';
 import { ReceitasDashboardComponent } from './receitas/receitas-dashboard.component';
 import { ConfiguracoesComponent } from './configuracoes/configuracoes.component';
+import { ConfiguracoesGuardGuard } from './guards/configuracoes-guard.guard';
+import { ReceitasPrincialComponent } from './receitas/principal/receitas-princial.component';
 
 const routes: Routes = [
-  { path: 'criarreceita', component: AdicionarReceitaComponent },
-  { path: 'dashboard', component: ReceitasDashboardComponent },
+  { path: 'receita', component: ReceitasPrincialComponent },
+  { path: 'dashboard', component: ReceitasDashboardComponent, canActivate: [ConfiguracoesGuardGuard] },
   {path: 'config', component: ConfiguracoesComponent},
+  {path:'addreceita', component: AdicionarReceitaComponent},
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 

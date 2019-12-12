@@ -1,14 +1,17 @@
 <div class="row">
-  <div class="container col-6">
+  <div class="shadow-sm m-1 col-6">
     <app-graficobarra
       [barChartData]="chartData"
       [barChartLabels]="chartLabels"
     ></app-graficobarra>
   </div>
-  <div class="container col-6">
-    <app-graficobarra
-      [barChartData]="impostosData"
-      [barChartLabels]="chartLabels"
-    ></app-graficobarra>
+  <div class="card shadow-sm p-0 m-1 col-5">
+    <div class="card-header ">
+      Produtos mais vendidos
+    </div>
+    <div class="card-body">
+      <app-grafico-doughnut></app-grafico-doughnut>
+    </div>
   </div>
 </div>
+

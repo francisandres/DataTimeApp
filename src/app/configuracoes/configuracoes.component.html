@@ -1,46 +1,196 @@
-<div class="container mt-3">
-  <div class="card">
-    <div class="card-header">
-      <h3>Configurações</h3>
-    </div>
+<div class="container">
+  <div>
+    <h5 class="ml-1 mt-3"><b>Criar a sua Empresa</b></h5>
 
-    <div class="card-body">
-      <h5 class="card-title">Tempo de Projeção</h5>
-      <div class="form-check form-check-inline">
+    <div class="row">
+      <div class="input-group m-1  mb-3 col">
         <input
-          class="form-check-input"
-          (change)="teste($event)"
-          type="radio"
-          name="inlineRadioOptions"
-          id="inlineRadio1"
-          value="1"
+          type="text"
+          class="form-control shadow-sm form-control-sm "
+          id="basic-url"
+          aria-describedby="basic-addon3"
+          placeholder="Nome da empresa"
         />
-        <label class="form-check-label" for="inlineRadio1">1 Ano</label>
       </div>
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          (change)="onSelectAno($event)"
-          type="radio"
-          name="inlineRadioOptions"
-          id="inlineRadio2"
-          value="2"
-        />
-        <label class="form-check-label" for="inlineRadio2">2 Anos</label>
-      </div>
-      <div class="form-check form-check-inline">
-        <input
-          class="form-check-input"
-          (change)="teste($event)"
-          type="radio"
-          name="inlineRadioOptions"
-          id="inlineRadio3"
-          value="3"
-        />
-        <label class="form-check-label" for="inlineRadio3">3 Anos</label>
-      </div>
-      <br>
-      <h5 class="card-title">Data de inicio da Projeção</h5>
+      <div class="col m-1"></div>
     </div>
+  </div>
+
+  <div class="container row">
+    <div class="card shadow-sm col m-1  p-0">
+      <div class="card-header ">
+        <h6><b>Estágio do seu negócio</b></h6>
+      </div>
+
+      <div class="card-body">
+        <span class=""
+          >Em que estágio está o seu negócio? Essa opção vai ajudar com alguns
+          pequenos ajustes
+        </span>
+        <br /><br />
+        <form #f="ngForm">
+          <div class="form-check ">
+            <input
+              class="form-check-input"
+              (change)="onSelectAno($event)"
+              type="radio"
+              name="inlineRadioOptions"
+              id="inlineRadio1"
+              value="1"
+            />
+            <label class="form-check-label" for="inlineRadio1">Novo</label>
+          </div>
+          <div class="form-check ">
+            <input
+              class="form-check-input"
+              (change)="onSelectAno($event)"
+              type="radio"
+              name="inlineRadioOptions"
+              id="inlineRadio2"
+              value="2"
+            />
+            <label class="form-check-label" for="inlineRadio2"
+              >Em funcionamento</label
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card shadow-sm col m-1 p-0">
+      <div class="card-header ">
+        <h6><b>Início da Projeção</b></h6>
+      </div>
+
+      <div class="card-body">
+        <span class=""
+          >Em que estágio está o seu negócio? Essa opção vai ajudar com alguns
+          pequenos ajustes
+        </span>
+        <br /><br />
+        <div class="class row">
+          <div class="class col-6">
+            <ng-select [items]="anos" [(ngModel)]="anoSelecionado"> </ng-select>
+          </div>
+          <div class="class col-6">
+            <ng-select [items]="meses" [(ngModel)]="mesSelecionado">
+            </ng-select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container row">
+    <div class="card shadow-sm col m-1  p-0">
+      <div class="card-header ">
+        <h6><b>Duração da Projeção</b></h6>
+      </div>
+
+      <div class="card-body">
+        <span class=""
+          >Pretende que o sistema projecte o seu negócio para tempo?
+        </span>
+        <br /><br />
+        <form #f="ngForm">
+          <div class="form-check ">
+            <input
+              class="form-check-input"
+              (change)="onSelectAno($event)"
+              type="radio"
+              name="inlineRadioOptions"
+              id="inlineRadio1"
+              value="1"
+            />
+            <label class="form-check-label" for="inlineRadio1">1 Ano</label>
+          </div>
+          <div class="form-check ">
+            <input
+              class="form-check-input"
+              (change)="onSelectAno($event)"
+              type="radio"
+              name="inlineRadioOptions"
+              id="inlineRadio2"
+              value="2"
+            />
+            <label class="form-check-label" for="inlineRadio2">2 Anos</label>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card shadow-sm col m-1  p-0">
+      <div class="card-header ">
+        <h6><b>Detalhe Mensal</b></h6>
+      </div>
+
+      <div class="card-body">
+        <span class=""
+          >Quer quanto tempo de detalhes mensais na sua projeção
+        </span>
+        <br /><br />
+        <form #f="ngForm">
+          <div class="form-check ">
+            <input
+              class="form-check-input"
+              (change)="onSelectAno($event)"
+              type="radio"
+              name="inlineRadioOptions"
+              id="inlineRadio1"
+              value="1"
+            />
+            <label class="form-check-label" for="inlineRadio1"
+              >1 Ano com detalhes mensais</label
+            >
+          </div>
+          <div class="form-check ">
+            <input
+              class="form-check-input"
+              (change)="onSelectAno($event)"
+              type="radio"
+              name="inlineRadioOptions"
+              id="inlineRadio2"
+              value="2"
+            />
+            <label class="form-check-label" for="inlineRadio2"
+              >2 Anos com detalhes mensais</label
+            >
+          </div>
+          <div class="form-check ">
+            <input
+              class="form-check-input"
+              (change)="onSelectAno($event)"
+              type="radio"
+              name="inlineRadioOptions"
+              id="inlineRadio1"
+              value="1"
+            />
+            <label class="form-check-label" for="inlineRadio1"
+              >3 Anos com detalhes mensais</label
+            >
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="card shadow-sm col m-1  p-0">
+      <div class="card-header ">
+        <h6><b>Moeda do sistema</b></h6>
+      </div>
+
+      <div class="card-body">
+        <span class="col">Qual a moeda que pretende usar? </span>
+        <br /><br />
+        <div class="col-6">
+            <ng-select [items]="moedas" [(ngModel)]="moedaSelecionada"> </ng-select>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <footer class="fixed-bottom container shadow">
+      <div class="m-1">
+        <button (click)="onSubmit()" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="bottom" title="Salvar">
+          <i class="fas fa-save m-2"></i> Salvar
+        </button>
+      </div>
+    </footer>
   </div>
 </div>

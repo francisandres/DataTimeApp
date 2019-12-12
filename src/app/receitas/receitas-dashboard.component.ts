@@ -23,7 +23,14 @@ export class ReceitasDashboardComponent implements OnInit {
     'Nov',
     'Dez'
   ];
-  chartData: ChartDataSets[] = [];
+  chartData: ChartDataSets[] = [
+    {
+      data: [85, 72, 78, 75, 77, 75],
+      label: 'Receita',
+      barThickness: 24, // number (pixels) or 'flex'
+      maxBarThickness: 28 // number (pixels)
+    }
+  ];
 
   impostosData: ChartDataSets[] = [];
   constructor(private fluxrecser: FluxosReceitasService) {}
@@ -43,12 +50,15 @@ export class ReceitasDashboardComponent implements OnInit {
     this.fluxrecser.fluxosimpostos.forEach(e => {
       this.impostosData.push({
         data: e.receitas.map(el => {
-
           return el.valor;
         }),
         label: e.nome,
         stack: 'Impostos'
       });
+    });
+
+    this.fluxrecser.periodoEstudo.forEach((e, i) => {
+      this.chartLabels[i] = e;
     });
   }
 }

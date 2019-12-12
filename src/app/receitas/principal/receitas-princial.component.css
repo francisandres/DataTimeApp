@@ -1,0 +1,13 @@
+.cor{
+    background-color: royalblue;
+}
+
+.borda{
+    border: solid 2px gray;
+
+    border-top-left-radius: 9px;
+    border-bottom-left-radius: 0px;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 9px;
+    background-color: white;
+}

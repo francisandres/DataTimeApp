@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar shadow-sm navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" routerLink="/">Satoshima</a>
   <button
     class="navbar-toggler"
@@ -14,10 +14,11 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#"
-          >Principal <span class="sr-only">(current)</span></a
-        >
+      <li class="nav-item">
+        <a class="nav-link" href="#">Plano de negócios </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pitch </a>
       </li>
       <li class="nav-item dropdown">
         <a
@@ -29,34 +30,23 @@
           aria-haspopup="true"
           aria-expanded="false"
         >
-          Registos
+          Projeções
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" routerLink="/criarreceita">Proveitos</a>
-          <a class="dropdown-item" href="#">Gastos</a>
-          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/receita">Receitas</a>
+          <a class="dropdown-item" href="#">Custos</a>
+          <a class="dropdown-item" href="#">Despesas</a>
+          <a class="dropdown-item" href="#">Pessoal</a>
+          <a class="dropdown-item" href="#">Inventário</a>
           <a class="dropdown-item" href="#">Financiamentos</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="#">Mapa de Cash Flow</a>
+          <a class="dropdown-item" href="#">Demonstração de Resultados</a>
         </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link"  [routerLink]="[ '/config']">Configurações</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Desativado</a>
-      </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input
-        class="form-control mr-sm-2"
-        type="search"
-        placeholder="Procurar..."
-        aria-label=""
-      />
-      <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">
-        Procurar
-      </button>
-    </form>
+    <i class="fas fa-cogs m-2" data-toggle="tooltip" data-placement="bottom" title="Configurações"></i>
+    <i class="fas fa-power-off m-2" data-toggle="tooltip" data-placement="bottom" title="Logout"></i>
   </div>
 </nav>
 

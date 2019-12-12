@@ -8,6 +8,7 @@ export class FluxosReceitasService {
   fluxos: Fluxo[] = [];
   fluxosimpostos: Fluxo[] = [];
   periodoEstudo: any[] = [];
+  guard = false;
 
   constructor() { }
 }

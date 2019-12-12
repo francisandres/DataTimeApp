@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -10,6 +10,12 @@ import { GraficoLinhaComponent } from './graficos/grafico-linha/grafico-linha.co
 import { AdicionarReceitaComponent } from './receitas/adicionar-receita.component';
 import { ReceitasDashboardComponent } from './receitas/receitas-dashboard.component';
 import { ConfiguracoesComponent } from './configuracoes/configuracoes.component';
+import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-datetimepicker';
+import { GraficoDoughnutComponent } from './graficos/grafico-doughnut/grafico-doughnut.component';
+import { ReceitasPrincialComponent } from './receitas/principal/receitas-princial.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+
 
 @NgModule({
   declarations: [
@@ -18,13 +24,20 @@ import { ConfiguracoesComponent } from './configuracoes/configuracoes.component'
     GraficoLinhaComponent,
     AdicionarReceitaComponent,
     ReceitasDashboardComponent,
-    ConfiguracoesComponent
+    ConfiguracoesComponent,
+    GraficoDoughnutComponent,
+    ReceitasPrincialComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ChartsModule
+    ChartsModule,
+    DlDateTimeDateModule,
+    DlDateTimePickerModule,
+    NgSelectModule,
+    NgbModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

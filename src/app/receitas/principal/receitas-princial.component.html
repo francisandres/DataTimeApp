@@ -1,0 +1,69 @@
+<div class="container">
+  <h5 class="ml-1 mt-3"><b>Receitas</b></h5>
+
+  <div class="row container align-self-start">
+    <div class="borda mt-4 col-6  align-self-start ">
+      <h4 class="mt-2">
+        <b>De onde vem a sua receita? </b>
+        <i
+          class="fas fa-info-circle"
+          data-toggle="tooltip"
+          data-placement="bottom"
+          title="Configurações"
+        ></i>
+      </h4>
+      <p class="mt-2" style="text-align: justify; line-height: 2.5">
+        Sendo a receita o combustível do seu negócio, é importante nessa fase a
+        sua fonte de receitas esteja bem identificada. Adicione aqui os seus
+        principais produtos, serviços e outras fontes de receitas. Tente ao
+        máximo agrupar as suas receitas dentro de uma visão de alto nível. Uma
+        loja de roupa poderá agrupar como fonte de receita vestidos, t-shirts,
+        calçado, etc. Para alguns negócios poderá mesmo escolhar mais e maior
+        detalhe introduzindo os produtos/serviços que fornece.
+      </p>
+    </div>
+    <div class="col-4 mt-4 align-content-center">
+      <img
+        class="align-content-center"
+        src="../../../assets/img/video-placeholder-1280x720-40-300x169.jpg"
+        alt="Smiley face"
+      />
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h3 class="modal-title" id="modal-basic-title"><b>Receita</b></h3>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-adicionar-receita></app-adicionar-receita>
+  </div>
+  <div class="modal-footer">
+    <span> Colocar botão</span>
+  </div>
+</ng-template>
+
+<div class="container">
+  <footer class="fixed-bottom container shadow">
+    <div class="m-1">
+      <button
+        (click)="open(content)"
+        class="btn btn-primary btn-sm"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title="Salvar"
+      >
+        <i class="fas fa-plus m-2"></i> Adicionar Receita
+      </button>
+    </div>
+  </footer>
+</div>

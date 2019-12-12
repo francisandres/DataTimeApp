@@ -3,43 +3,46 @@
     <div class="bs-stepper-header">
       <div class="step" data-target="#test-l-1">
         <button class="step-trigger">
-          <span class="bs-stepper-circle">1</span>
-          <span class="bs-stepper-label">Nome</span>
+          <span class="bs-stepper-circle letra">1</span>
+          <span class="bs-stepper-label letra">Nome</span>
         </button>
       </div>
       <div class="line"></div>
       <div class="step" data-target="#test-l-2">
         <button class="step-trigger">
-          <span class="bs-stepper-circle">2</span>
-          <span class="bs-stepper-label">Valor</span>
+          <span class="bs-stepper-circle letra">2</span>
+          <span class="bs-stepper-label letra">Detalhes</span>
         </button>
       </div>
       <div class="line"></div>
       <div class="step" data-target="#test-l-3">
         <button class="step-trigger">
-          <span class="bs-stepper-circle">3</span>
-          <span class="bs-stepper-label">Projeção</span>
+          <span class="bs-stepper-circle letra">3</span>
+          <span class="bs-stepper-label letra">Projeção</span>
         </button>
       </div>
-      <div class="line"></div>
-      <div class="step" data-target="#test-l-4">
-        <button class="step-trigger">
-          <span class="bs-stepper-circle">4</span>
-          <span class="bs-stepper-label">Inicio</span>
-        </button>
-      </div>
-      <div class="line"></div>
     </div>
 
     <div class="bs-stepper-content">
-      <form >
+      <form>
         <div id="test-l-1" class="content">
           <div class="form-group">
-            <label for="exampleInputEmail1">Nome da Receita</label>
+            <label for="exampleInputEmail1"
+              >Nome da Receita
+              <a
+                tabindex="0"
+                role="button"
+                data-toggle="popover"
+                data-trigger="focus"
+                title="Coloque aqui o nome da sua fonte de receita.
+                Ex: Telefone Samsung Galaxy S10"
+              >
+                <i class="fas fa-info-circle m-2"></i></a
+            ></label>
             <input
               type="text"
               class="form-control"
-              [(ngModel)]="chartData[0].label"
+              [(ngModel)]="fluxo.nome"
               [ngModelOptions]="{ standalone: true }"
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
@@ -50,32 +53,200 @@
         </div>
         <div id="test-l-2" class="content">
           <div class="form-group">
-            <label for="exampleInputEmail1">Valor em Kwanzas</label>
-            <input
-              type="number"
-              class="form-control"
-              [(ngModel)]="preco"
-              [ngModelOptions]="{ standalone: true }"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Valor"
-            />
+            <label for="">Produto ou serviço</label> <br />
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                (change)="onSelectReceita($event)"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio1"
+                value="produto"
+              />
+              <label class="form-check-label" for="inlineRadio1">Produto</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                (change)="onSelectReceita($event)"
+                type="radio"
+                name="inlineRadioOptions"
+                id="inlineRadio2"
+                value="servico"
+              />
+              <label class="form-check-label" for="inlineRadio2">Serviço</label>
+            </div>
+            <br />
+            <div [ngSwitch]="tipo">
+              <div *ngSwitchCase="'produto'">
+                  <div class="row mt-4">
+                      <div class="input-group   mb-3 col">
+                        <input
+                          type="number"
+                          class="form-control shadow-sm form-control-sm "
+                          id="basic-url"
+                          aria-describedby="basic-addon3"
+                          placeholder="Variação no preço"
+                        />
+                      </div>
+                      <div class="input-group   mb-3 col">
+                        <input
+                          type="number"
+                          class="form-control shadow-sm form-control-sm "
+                          id="basic-url"
+                          aria-describedby="basic-addon3"
+                          placeholder="Preço do produto"
+                        />
+                      </div>
+                    </div>
+              </div>
+              <div *ngSwitchCase="'servico'">
+                <form action="">
+                  <label class="mt-4" for=""
+                    >Serviço por subscrição mensal</label
+                  >
+                  <br />
+                  <div class="form-check form-check-inline">
+                    <input
+                      (change)="onSelectSubscricao($event)"
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio1"
+                      value="sim"
+                    />
+                    <label class="form-check-label" for="inlineRadio1"
+                      >Sim</label
+                    >
+                  </div>
+                  <div class="form-check form-check-inline">
+                    <input
+                      (change)="onSelectSubscricao($event)"
+                      class="form-check-input"
+                      type="radio"
+                      name="inlineRadioOptions"
+                      id="inlineRadio2"
+                      value="nao"
+                    />
+                    <label class="form-check-label" for="inlineRadio2"
+                      >Não</label
+                    >
+                  </div>
+                  <br />
+                </form>
+
+                <div [ngSwitch]="servicoSubscricao">
+                  <div *ngSwitchCase="'sim'">
+                    <div class="row mt-4">
+                      <div class="input-group  mb-3 col">
+                        <input
+                          type="number"
+                          class="form-control shadow-sm form-control-sm "
+                          id="basic-url"
+                          aria-describedby="basic-addon3"
+                          placeholder="Novos clientes p/ mês"
+                        />
+                      </div>
+                      <div class="input-group   mb-3 col">
+                        <input
+                          type="number"
+                          class="form-control shadow-sm form-control-sm "
+                          id="basic-url"
+                          aria-describedby="basic-addon3"
+                          placeholder="% perda de clientes mês"
+                        />
+                      </div>
+                      <div class="input-group   mb-3 col">
+                        <input
+                          type="number"
+                          class="form-control shadow-sm form-control-sm "
+                          id="basic-url"
+                          aria-describedby="basic-addon3"
+                          placeholder="Variação no preço"
+                        />
+                      </div>
+                      <div class="input-group   mb-3 col">
+                        <input
+                          type="number"
+                          class="form-control shadow-sm form-control-sm "
+                          id="basic-url"
+                          aria-describedby="basic-addon3"
+                          placeholder="Preço do serviço"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div *ngSwitchCase="'nao'">
+                    <div class="row mt-4">
+                      <div class="input-group   mb-3 col">
+                        <input
+                          type="number"
+                          class="form-control shadow-sm form-control-sm "
+                          id="basic-url"
+                          aria-describedby="basic-addon3"
+                          placeholder="Variação no preço"
+                        />
+                      </div>
+                      <div class="input-group   mb-3 col">
+                        <input
+                          type="number"
+                          class="form-control shadow-sm form-control-sm "
+                          id="basic-url"
+                          aria-describedby="basic-addon3"
+                          placeholder="Preço do serviço"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <p *ngSwitchDefault></p>
+                </div>
+              </div>
+              <div *ngSwitchDefault></div>
+            </div>
           </div>
+
           <button (click)="next()" class="btn btn-primary">Próximo</button>
         </div>
         <div id="test-l-3" class="content">
           <div class="form-group">
             <label for="exampleInputEmail1">Projeção em anos</label>
-            <input
-              (change)="OnChangeProjecao($event)"
-              type="number"
-              min="0"
-              max="5"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Projecção"
-            />
+            <div class="row container">
+              <div
+                class="col-5 shadow  m-1"
+                *ngFor="let mes of fluxo.receitas; let i = index"
+              >
+                <div class="form-group row">
+                  <div class="col-8">
+                    <label for="exampleInputEmail1">{{ mes.data }} Valor</label>
+
+                    <input
+                      type="text"
+                      [(ngModel)]="fluxo.receitas[i].valor"
+                      [ngModelOptions]="{ standalone: true }"
+                      (ngModelChange)="onChangeValor($event, i)"
+                      class="form-control form-control-sm"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      placeholder="{{ mes.valor }}"
+                    />
+                  </div>
+                  <div class="col-4">
+                    <label for="exampleInputEmail1">Qtdde</label>
+
+                    <input
+                      type="text"
+                      [(ngModel)]="fluxo.receitas[i].quantidade"
+                      [ngModelOptions]="{ standalone: true }"
+                      (ngModelChange)="onChangeQuantidade($event, i)"
+                      class="form-control form-control-sm"
+                      id="exampleInputEmail1"
+                      aria-describedby="emailHelp"
+                      placeholder="1"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
           <button (click)="next()" class="btn btn-primary">Próximo</button>
         </div>
@@ -90,65 +261,17 @@
               aria-describedby="emailHelp"
             />
           </div>
-          <button type="submit" (click)="onSubmit()"  class="btn btn-primary mt-5">Gravar</button>
+          <button
+            type="submit"
+            (click)="onSubmit()"
+            class="btn btn-primary mt-5"
+          >
+            Gravar
+          </button>
         </div>
       </form>
     </div>
   </div>
 </div>
 
-<div class="container">
-  <form></form>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div
-      class="col-3 shadow  m-1"
-      *ngFor="let mes of fluxo.receitas; let i = index"
-    >
-      <div class="form-group row">
-        <div class="col-8">
-          <label for="exampleInputEmail1">{{ mes.data }} Valor</label>
-
-          <input
-            type="text"
-            [(ngModel)]="fluxo.receitas[i].valor"
-            (ngModelChange)="onChangeValor($event, i)"
-            class="form-control form-control-sm"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="{{ mes.valor }}"
-          />
-        </div>
-        <div class="col-4">
-          <label for="exampleInputEmail1">Qtdde</label>
-
-          <input
-            type="text"
-            [(ngModel)]="fluxo.receitas[i].quantidade"
-            (ngModelChange)="onChangeQuantidade($event, i)"
-            class="form-control form-control-sm"
-            id="exampleInputEmail1"
-            aria-describedby="emailHelp"
-            placeholder="1"
-          />
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div *ngIf="fluxo.receitas" class="container" [ngSwitch]="grafico">
-        <button type="button" class="btn btn-primary btn-sm" (click)="trocarGrafico()">Trocar</button>
-  <app-graficobarra
-  *ngSwitchCase="true"
-    [barChartData]="chartData"
-    [barChartLabels]="chartLabels"
-  ></app-graficobarra>
-  <app-grafico-linha
-  *ngSwitchCase="false"
-    [lineChartData]="chartData"
-    [lineChartLabels]="chartLabels"
-  ></app-grafico-linha>
-</div>
+<div class="container"></div>

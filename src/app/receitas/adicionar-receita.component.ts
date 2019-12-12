@@ -1,15 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { addMonths, format } from 'date-fns';
 
-
 import Stepper from 'bs-stepper';
 import { ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { Fluxo } from '../Fluxo';
 import { FluxosReceitasService } from '../fluxos/fluxos-receitas.service';
 
-import {Router} from '@angular/router';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-adicionar-receita',
@@ -33,98 +31,78 @@ export class AdicionarReceitaComponent implements OnInit {
   projecao: any[] = [];
   preco: number;
   variacao = -10 / 12;
-  grafico = true;
-
+  tipo = null;
+  servicoSubscricao =  null;
   fluxo: Fluxo;
 
-  constructor(private fluxSer: FluxosReceitasService, private router: Router) { }
+  constructor(private fluxSer: FluxosReceitasService, private router: Router) {}
 
   ngOnInit(): void {
     this.fluxo = new Fluxo();
     this.datastring = format(new Date(), 'yyyy-MM-dd');
+    this.fluxo.receitas = [];
+    this.fluxo.receitas.length = this.fluxSer.periodoEstudo.length;
+    this.fluxo.receitas.fill(
+      { data: null, valor: null, quantidade: null },
+      0,
+      this.fluxSer.periodoEstudo.length
+    );
+
+    this.fluxSer.periodoEstudo.forEach(e => this.chartLabels.push(e));
     this.stepper = new Stepper(document.querySelector('#stepper1'), {
       linear: false,
       animation: true
     });
   }
 
+  onValorChange(e) {
+    this.preco = e.target.value;
+    this.fluxSer.periodoEstudo.forEach((el, i) => {
+      this.fluxo.receitas[i] = {
+        data: el,
+        valor: this.preco,
+        quantidade: 1
+      };
+      this.projecao.push(+this.preco);
+      this.preco = this.preco * (this.variacao / 100 + 1);
+    });
+    this.chartData[0] = { ...this.chartData[0], data: this.projecao };
+    console.log(this.projecao.reduce((accumulator, currentValue) => accumulator + currentValue, 0));
+  }
+
+
   onSubmit() {
     this.fluxSer.fluxos.push(this.fluxo);
     // tslint:disable-next-line: prefer-const
-    let print  = Array(12).fill(null);
+    let print = Array(12).fill(null);
 
     this.fluxo.receitas.forEach((e, i) => {
-        print[i + 1] = ((e.valor / 114) * 14) * e.quantidade;
+      print[i + 1] = (e.valor / 114) * 14 * e.quantidade;
     });
 
-    this.fluxSer.fluxosimpostos.push({nome: 'Impostos', receitas: print.slice(0, 12).map(
-      (e, i) => ({valor: e, data: this.fluxo.receitas[i].data})
-    )} as Fluxo);
-    console.log({nome: 'Impostos', receitas: print.slice(0, 12).map(
-      (e, i) => ({valor: e, data: this.fluxo.receitas[i].data})
-    )});
+    this.fluxSer.fluxosimpostos.push({
+      nome: 'Impostos',
+      receitas: print
+        .slice(0, 12)
+        .map((e, i) => ({
+          valor: Math.round(e * 100) / 100,
+          data: this.fluxo.receitas[i].data
+        }))
+    } as Fluxo);
+    console.log({
+      nome: 'Impostos',
+      receitas: print
+        .slice(0, 12)
+        .map((e, i) => ({ valor: e, data: this.fluxo.receitas[i].data }))
+    });
   }
 
   next() {
     this.stepper.next();
-  }
-
-  OnChangeProjecao(e) {
-    // refactor de formas a tornar mais funcional
-    let preco = this.preco;
-    this.fluxo.nome = this.chartData[0].label;
-    this.data = new Date(this.datastring);
-    if (!this.fluxo.receitas) {
-      this.fluxo.receitas = [];
-    }
-    this.fluxo.receitas.length = e.target.value * 12;
-    this.chartLabels.length = e.target.value * 12;
-    this.projecao.length = e.target.value * 12;
-    console.log(this.fluxo);
-
-    for (let i = 0; i < e.target.value * 12; i++) {
-      // tslint:disable-next-line:no-debugger
-      this.projecao[i] = preco;
-      this.fluxo.receitas[i] = {
-        data: format(this.data, 'MMM/yyyy'),
-        valor: preco,
-        quantidade: 1
-      };
-      this.chartLabels[i] = format(this.data, 'MMM/yyyy');
-
-      this.data = addMonths(this.data, 1);
-      preco =
-        Math.round(this.projecao[i] * (this.variacao / 100 + 1) * 100) / 100;
-    }
-
-    this.chartData[0] = { ...this.chartData[0], data: this.projecao };
-    this.chartLabels = this.chartLabels.slice(0, 12);
     console.log(this.fluxo);
   }
-  OnChangeData(e) {
-    if (!e) {
-      return;
-    } else {
-      this.datastring = e.target.value;
-      this.data = new Date(this.datastring);
-      for (let i = 0; i < this.fluxo.receitas.length; i++) {
-        // tslint:disable-next-line:no-debugger
 
-        this.fluxo.receitas[i] = {
-          data: format(this.data, 'MMM/yyyy'),
-          valor: null,
-          quantidade: 1
-        };
-        this.chartLabels[i] = format(this.data, 'MMM/yyyy');
-        // tslint:disable-next-line:no-debugger
 
-        this.data = addMonths(this.data, 1);
-      }
-      this.chartData[0] = { ...this.chartData[0], data: [] };
-      this.chartLabels = this.chartLabels.slice(0, 12);
-      console.log(this.fluxo.receitas);
-    }
-  }
 
   onChangeValor(e, i) {
     this.fluxo.receitas.forEach((res, index) => {
@@ -137,9 +115,12 @@ export class AdicionarReceitaComponent implements OnInit {
       this.chartData[0].data[index] = +(res.valor * res.quantidade);
     });
     this.chartLabels = this.chartLabels.slice(0, 12);
-
-}
-trocarGrafico() {
-  this.grafico ? this.grafico = false : this.grafico = true;
-}
+  }
+ onSelectReceita(e) {
+   this.tipo = e.target.value;
+   this.servicoSubscricao = null;
+ }
+ onSelectSubscricao(e) {
+   this.servicoSubscricao = e.target.value;
+ }
 }
