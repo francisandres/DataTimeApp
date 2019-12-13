@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'receita', component: ReceitasPrincialComponent },
   { path: 'dashboard', component: ReceitasDashboardComponent, canActivate: [ConfiguracoesGuardGuard] },
   {path: 'config', component: ConfiguracoesComponent},
-  {path:'addreceita', component: AdicionarReceitaComponent},
+  {path: 'addreceita', component: AdicionarReceitaComponent},
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' }
 ];
 

@@ -30,6 +30,7 @@
             <label for="exampleInputEmail1"
               >Nome da Receita
               <a
+                
                 tabindex="0"
                 role="button"
                 data-toggle="popover"
@@ -250,25 +251,7 @@
           </div>
           <button (click)="next()" class="btn btn-primary">Próximo</button>
         </div>
-        <div id="test-l-4" class="content text-center">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Data de incio da atividade</label>
-            <input
-              (change)="OnChangeData($event)"
-              type="date"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-          </div>
-          <button
-            type="submit"
-            (click)="onSubmit()"
-            class="btn btn-primary mt-5"
-          >
-            Gravar
-          </button>
-        </div>
+        
       </form>
     </div>
   </div>

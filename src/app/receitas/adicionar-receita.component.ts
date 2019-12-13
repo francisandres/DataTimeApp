@@ -33,19 +33,21 @@ export class AdicionarReceitaComponent implements OnInit {
   variacao = -10 / 12;
   tipo = null;
   servicoSubscricao =  null;
-  fluxo: Fluxo;
+  fluxo: Fluxo = new Fluxo();
+
 
   constructor(private fluxSer: FluxosReceitasService, private router: Router) {}
 
   ngOnInit(): void {
-    this.fluxo = new Fluxo();
+
     this.datastring = format(new Date(), 'yyyy-MM-dd');
     this.fluxo.receitas = [];
-    this.fluxo.receitas.length = this.fluxSer.periodoEstudo.length;
+    this.fluxo.receitas.length = 12; /* this.fluxSer.periodoEstudo.length; */
     this.fluxo.receitas.fill(
       { data: null, valor: null, quantidade: null },
       0,
-      this.fluxSer.periodoEstudo.length
+      12
+      /* this.fluxSer.periodoEstudo.length */
     );
 
     this.fluxSer.periodoEstudo.forEach(e => this.chartLabels.push(e));
