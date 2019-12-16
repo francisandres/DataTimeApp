@@ -168,6 +168,8 @@
                       </div>
                       <div class="input-group   mb-3 col">
                         <input
+                          (change)="onValorChange($event)"
+                         
                           type="number"
                           class="form-control shadow-sm form-control-sm "
                           id="basic-url"
@@ -190,6 +192,8 @@
                       </div>
                       <div class="input-group   mb-3 col">
                         <input
+                        (change)="onValorChange($event)"
+                       
                           type="number"
                           class="form-control shadow-sm form-control-sm "
                           id="basic-url"
@@ -249,7 +253,7 @@
               </div>
             </div>
           </div>
-          <button (click)="next()" class="btn btn-primary">Próximo</button>
+          <button (click)="onSubmit()" class="btn btn-primary">Salvar</button>
         </div>
         
       </form>

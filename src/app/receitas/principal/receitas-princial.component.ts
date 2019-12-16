@@ -1,6 +1,7 @@
-import {  OnInit, Component} from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { FluxosReceitasService } from 'src/app/fluxos/fluxos-receitas.service';
 
 @Component({
   selector: 'app-receitas-princial',
@@ -10,19 +11,28 @@ import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 export class ReceitasPrincialComponent implements OnInit {
   closeResult: string;
 
+  constructor(
+    private modalService: NgbModal,
+    private fluxSer: FluxosReceitasService
+  ) {}
 
-  constructor(private modalService: NgbModal) {}
-
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
   open(content) {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title', size: 'lg', centered: true,
-     backdropClass: 'light-blue-backdrop'}).result.then((result) => {
-      this.closeResult = `Closed with: ${result}`;
-    }, (reason) => {
-      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-    });
+    this.modalService
+      .open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        size: 'lg',
+        centered: true,
+        backdropClass: 'light-blue-backdrop'
+      })
+      .result.then(
+        result => {
+          this.closeResult = `Closed with: ${result}`;
+        },
+        reason => {
+          this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+        }
+      );
   }
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
@@ -30,8 +40,11 @@ export class ReceitasPrincialComponent implements OnInit {
     } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
       return 'by clicking on a backdrop';
     } else {
-      return  `with: ${reason}`;
+      return `with: ${reason}`;
     }
   }
+  fecharModal() {
+    this.modalService.dismissAll();
 
+  }
 }

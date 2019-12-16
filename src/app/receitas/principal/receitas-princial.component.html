@@ -1,8 +1,8 @@
 <div class="container">
   <h5 class="ml-1 mt-3"><b>Receitas</b></h5>
-
-  <div class="row container align-self-start">
-    <div class="borda mt-4 col-6  align-self-start ">
+ 
+  <div  class="row container align-self-start">
+    <div class="borda mt-4 col-6  align-self-start shadow-sm">
       <h4 class="mt-2">
         <b>De onde vem a sua receita? </b>
         <i
@@ -12,7 +12,7 @@
           title="Configurações"
         ></i>
       </h4>
-      <p class="mt-2" style="text-align: justify; line-height: 2.5">
+      <p class="mt-4" style="text-align: justify; line-height: 2.5; font-size: smaller;">
         Sendo a receita o combustível do seu negócio, é importante nessa fase a
         sua fonte de receitas esteja bem identificada. Adicione aqui os seus
         principais produtos, serviços e outras fontes de receitas. Tente ao
@@ -26,10 +26,42 @@
       <img
         class="align-content-center"
         src="../../../assets/img/video-placeholder-1280x720-40-300x169.jpg"
-        alt="Smiley face"
+        alt="Imagem video"
       />
     </div>
   </div>
+<div class="mt-3">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Nome</th>
+        <th scope="col">Tipo</th>
+        <th scope="col">Itens</th>
+        <th scope="col"><b>Total</b></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">1</th>
+        <td>Mark</td>
+        <td>Otto</td>
+        <td>@mdo</td>
+      </tr>
+      <tr>
+        <th scope="row">2</th>
+        <td>Jacob</td>
+        <td>Thornton</td>
+        <td>@fat</td>
+      </tr>
+      <tr>
+        <th scope="row">3</th>
+        <td>Larry</td>
+        <td>the Bird</td>
+        <td>@twitter</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 </div>
 
 <ng-template #content let-modal>
@@ -45,7 +77,7 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-adicionar-receita></app-adicionar-receita>
+    <app-adicionar-receita (fechar)="fecharModal()"></app-adicionar-receita>
   </div>
   <div class="modal-footer">
     <span> Colocar botão</span>
