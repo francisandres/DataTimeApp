@@ -14,6 +14,9 @@ import { DlDateTimeDateModule, DlDateTimePickerModule } from 'angular-bootstrap-
 import { GraficoDoughnutComponent } from './graficos/grafico-doughnut/grafico-doughnut.component';
 import { ReceitasPrincialComponent } from './receitas/principal/receitas-princial.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { DrPrincipalComponent } from './DR/dr-principal/dr-principal.component';
+import { DespesasPrincipalComponent } from './despesas/despesas-principal/despesas-principal.component';
+import { AdicionarDespesaComponent } from './despesas/adicionar-despesa/adicionar-despesa.component';
 
 
 
@@ -26,7 +29,10 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     ReceitasDashboardComponent,
     ConfiguracoesComponent,
     GraficoDoughnutComponent,
-    ReceitasPrincialComponent
+    ReceitasPrincialComponent,
+    DrPrincipalComponent,
+    DespesasPrincipalComponent,
+    AdicionarDespesaComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="card mt-2">
+    <div class="card-header">
+      <h4><b>Demonstração de Resultados</b></h4>
+    </div>
+    <div class="card-body">
+      <table class="table table-borderless">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th
+              style="font-size: 7pt;"
+              *ngFor="let item of fluxSer.periodoEstudo"
+              scope="col"
+            >
+              {{ item }}
+            </th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <th style="background-color: lavender;" scope="row">Receita</th>
+          </tr>
+          <tr style="font-size: 7pt;"  *ngFor="let receita of fluxSer.fluxos; let i = index">
+            <th class="ml-10" scope="row">{{ receita.nome }}</th>
+            <td style="font-size: 7pt;" *ngFor="let item of fluxSer.fluxos[i].receitas">
+              {{ (item.valor * item.quantidade) |  currency }}
+            </td>
+          </tr>
+          <tr>
+            <th class="ml-10" scope="row">Total</th>
+            <td style="font-size: 7pt;" *ngFor="let item of total"><b>{{ item |  currency}}</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -10,13 +10,30 @@ import { FluxosReceitasService } from 'src/app/fluxos/fluxos-receitas.service';
 })
 export class ReceitasPrincialComponent implements OnInit {
   closeResult: string;
-
+  totalQuantidade: any[] = [];
+  total: any[] = [];
   constructor(
     private modalService: NgbModal,
     private fluxSer: FluxosReceitasService
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    const quantidademensal = [];
+    const totalmensal = [];
+    this.fluxSer.fluxos.forEach((el, ind) => {
+      el.receitas.forEach(
+        (e, i) => {(totalmensal[i] = e.quantidade * e.valor);
+        quantidademensal[i] = e.quantidade;
+        }
+      );
+      this.total.push(totalmensal.reduce(
+        (acc, curr) => acc + curr
+      ));
+      this.totalQuantidade.push(quantidademensal.reduce(
+        (acc, curr) => acc + curr
+      ));
+    });
+  }
   open(content) {
     this.modalService
       .open(content, {
@@ -45,6 +62,5 @@ export class ReceitasPrincialComponent implements OnInit {
   }
   fecharModal() {
     this.modalService.dismissAll();
-
   }
 }

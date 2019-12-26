@@ -1,67 +1,49 @@
 <div class="container">
-  <h5 class="ml-1 mt-3"><b>Receitas</b></h5>
- 
-  <div  class="row container align-self-start">
-    <div class="borda mt-4 col-6  align-self-start shadow-sm">
-      <h4 class="mt-2">
-        <b>De onde vem a sua receita? </b>
-        <i
-          class="fas fa-info-circle"
-          data-toggle="tooltip"
-          data-placement="bottom"
-          title="Configurações"
-        ></i>
-      </h4>
-      <p class="mt-4" style="text-align: justify; line-height: 2.5; font-size: smaller;">
-        Sendo a receita o combustível do seu negócio, é importante nessa fase a
-        sua fonte de receitas esteja bem identificada. Adicione aqui os seus
-        principais produtos, serviços e outras fontes de receitas. Tente ao
-        máximo agrupar as suas receitas dentro de uma visão de alto nível. Uma
-        loja de roupa poderá agrupar como fonte de receita vestidos, t-shirts,
-        calçado, etc. Para alguns negócios poderá mesmo escolhar mais e maior
-        detalhe introduzindo os produtos/serviços que fornece.
-      </p>
-    </div>
-    <div class="col-4 mt-4 align-content-center">
-      <img
-        class="align-content-center"
-        src="../../../assets/img/video-placeholder-1280x720-40-300x169.jpg"
-        alt="Imagem video"
-      />
-    </div>
+    <div class="container-fluid home-main">
+        <h2>Receitas <span style="color: orangered;" class="blinker">...</span></h2>
+        <button (click)="open(content)" type="button" class="btn btn-default">Nova...</button>
+      </div>
+      <div class="container-fluid home-content1">
+        <div class="row">
+          <div class="col-md-6 content1-left">
+            <h3>O que é uma receita <span class="blinker">?</span></h3>
+            <p>
+              Build responsive, mobile-first projects on the web with the world’s
+              most popular front-end component library.
+            </p>
+            <!-- <div class="content1-left"></div> -->
+          </div>
+          <div class="col-md-6 content1-right">
+            <p>
+              Bootstrap is an open source toolkit for developing with HTML, CSS, and
+              JS. Quickly prototype your ideas or build your entire app with our
+              Sass variables and mixins, responsive grid system, extensive prebuilt
+              components, and powerful plugins built on jQuery.
+            </p>
+          </div>
+        </div>
+      </div>
+    
+  <div class="mt-3">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Itens</th>
+          <th scope="col"><b>Total</b></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let receita of fluxSer.fluxos; let i = index">
+          <th scope="row">{{ receita.nome }}</th>
+          <td>{{ receita.tipo }}</td>
+          <td>{{ totalQuantidade[i] }}</td>
+          <td>{{ total[i] | currency: "AOA":"symbol":"4.2-2" }}</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-<div class="mt-3">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Nome</th>
-        <th scope="col">Tipo</th>
-        <th scope="col">Itens</th>
-        <th scope="col"><b>Total</b></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 </div>
 
 <ng-template #content let-modal>

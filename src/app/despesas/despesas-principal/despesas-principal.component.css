@@ -5,7 +5,7 @@
     text-align: center;
 }
 .blinker{
-    animation: blinker 0.75s linear infinite;
+    animation: blinker 1.5s linear infinite;
 }
 @keyframes blinker {
   50% {
@@ -14,7 +14,7 @@
 }
 .home-main button{
     background: #fff;
-    color: #428bca;
+    color: #5812c5;
     border-radius: 0;
     font-weight: 700;
     width: 16%;
@@ -24,7 +24,7 @@
 }
 .home-main button:hover{
     transition: 1s ease;
-    color:#428bca;
+    color:#5812c5;
     width: 19%;
 }
 .content1-left{

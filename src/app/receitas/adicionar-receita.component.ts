@@ -41,7 +41,13 @@ export class AdicionarReceitaComponent implements OnInit {
   constructor(private fluxSer: FluxosReceitasService, private router: Router) {}
 
   ngOnInit(): void {
+    if (this.fluxSer.periodoEstudo.length === 0) {
+      this.fluxSer.periodoEstudo = ['Dec-2019', 'Jan-2020', 'Feb-2020', 'Mar-2020',
+      'Apr-2020', 'May-2020', 'Jun-2020', 'Jul-2020', 'Aug-2020', 'Sep-2020', 'Out-2020',
+    'Nov-2020' ];
+     }
     this.datastring = format(new Date(), 'yyyy-MM-dd');
+    this.fluxo.tipo = 'ordinária';
     this.fluxo.receitas = [];
     this.fluxo.receitas.length = 12; /* this.fluxSer.periodoEstudo.length; */
     this.fluxo.receitas.fill(
@@ -73,7 +79,8 @@ export class AdicionarReceitaComponent implements OnInit {
         valor: this.preco
       };
       this.projecao.push(+this.preco);
-      this.preco = this.preco * (this.variacao / 100 + 1);
+
+    //  this.preco = this.preco * (this.variacao / 100 + 1); adicionar variação
     });
     this.chartData[0] = { ...this.chartData[0], data: this.projecao };
     console.log(
